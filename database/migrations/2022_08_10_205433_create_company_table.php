@@ -13,19 +13,16 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('company', function(Blueprint $table){
+            $table->bigIncrements('company_id');
+            $table->string('company_name');
+            $table->string('company_adress');
             $table->timestamps();
+            $table->timestamp('delete_at')->nullable();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('company');
     }
 }

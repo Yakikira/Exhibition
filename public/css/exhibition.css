@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+.upper_page{
+    display:grid;
+    grid-template-columns:5fr 1fr;
+    margin: 20px;
+}
+
+.exhibitions{
+    display:grid;
+    max-width: 600px;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px 200px;
+    background-color: rgb(197, 230, 231);
+    margin: 5px;
+    padding: 10px;
+}
+.all_exhibitions{
+    background-color:white;
+    width: 200px;
+}

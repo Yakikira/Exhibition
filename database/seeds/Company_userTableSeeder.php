@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class Company_userTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('company_users')->insert([
             'name'                  =>'user',
             'company_name'          =>'company',
             'company_dept'          =>'dept',
@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'adress'          =>'adress',
             'password'      =>Hash::make('12345678'),
             'remember_token'=>Str::random(10),
-            ]);
+            'company_id'                  =>1,
+        ]);
     }
 }

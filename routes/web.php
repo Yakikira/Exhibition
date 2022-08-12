@@ -19,3 +19,5 @@ Route::get('/user_company', 'ExhibitController@user_company');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('profile',function(){})->middleware('auth:guard-name');

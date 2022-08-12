@@ -11,6 +11,9 @@ class CompaniesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('companies')->insert([
+            'company_name'              =>'company_name',
+            'company_adress'              =>'company_adress',
+            ]);
     }
 }

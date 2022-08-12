@@ -18,7 +18,7 @@ class CreateCompaniesTable extends Migration
             $table->string('company_name');
             $table->string('company_adress');
             $table->timestamps();
-            $table->timestamp('delete_at')->nullable();
+            $table->softDeletes();
         });
     }
     public function down()

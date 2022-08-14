@@ -17,7 +17,7 @@ class Company_userTableSeeder extends Seeder
             'company_dept'          =>'dept',
             'business_category'     =>'category',
             'tell'                  =>'05000000000',
-            'email'         =>'user@example.com',
+            'email'         =>'company_user@example.com',
             'adress'          =>'adress',
             'password'      =>Hash::make('12345678'),
             'remember_token'=>Str::random(10),

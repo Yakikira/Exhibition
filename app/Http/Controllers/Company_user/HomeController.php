@@ -12,9 +12,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth:compay_user');
+    }
+    
     public function index()
     {
-        //
+        return view('company_user.home');
     }
 
     /**

@@ -12,13 +12,13 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name'                  =>'user',
-            'company_name'          =>'company',
-            'company_dept'          =>'dept',
-            'business_category'     =>'category',
+            'name'                  =>'user6',
+            'company_name'          =>'company6',
+            'company_dept'          =>'dept6',
+            'business_category'     =>'category6',
             'tell'                  =>'05000000000',
-            'email'         =>'user@example.com',
-            'adress'          =>'adress',
+            'email'         =>'user6@example.com',
+            'adress'          =>'adress6',
             'password'      =>Hash::make('12345678'),
             'remember_token'=>Str::random(10),
             ]);

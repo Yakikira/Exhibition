@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:compay_user');
+        $this->middleware('auth:company_user');
     }
     
     public function index()

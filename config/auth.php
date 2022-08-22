@@ -43,7 +43,7 @@ return [
         
         'company_user'=>[
             'driver'=>'session',
-            'provider'=>'companies',
+            'provider'=>'company_users',
             ],
 
         'api' => [
@@ -105,7 +105,7 @@ return [
             'throttle' => 60,
         ],
         'company_users' => [
-            'provider' => 'companies',
+            'provider' => 'company_users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

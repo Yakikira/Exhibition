@@ -41,24 +41,24 @@
                         <!-- Authentication Links -->
                         @unless (Auth::guard('company_user')->check())
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('company_user.login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('company_user.login') }}">{{ __('ログイン') }}</a>
                             </li>
                             @if (Route::has('company_user.register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('company_user.register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('company_user.register') }}">{{ __('新規登録(企業ユーザー)') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::company_user()->name }} <span class="caret"></span>
+                                    {{ auth() }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('company_user.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('ログアウト') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('company_user.logout') }}" method="POST" style="display: none;">

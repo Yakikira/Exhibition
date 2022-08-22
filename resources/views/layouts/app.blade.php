@@ -41,7 +41,10 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('user.login') }}">{{ __('一般ユーザーログイン') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('company_user.login') }}">{{ __('企業ユーザーログイン') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -60,7 +63,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

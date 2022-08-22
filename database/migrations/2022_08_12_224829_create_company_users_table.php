@@ -27,7 +27,7 @@ class CreateCompanyUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('delete_at')->nullable();
-            $table->bigInteger('company_id');
+            $table->bigInteger('company_id')->unsigned();
             $table->softDeletes();
         });
     }

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             BoothsTableSeeder::class,
             CompaniesTableSeeder::class,
             ItemsTableSeeder::class,
+            HistorySeeder::class,
             ]);
     }
 }

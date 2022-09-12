@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'company_name','company_dept','business_category','tell','email', 'password','adress',
+        'user_name', 'company_name','company_dept','business_category','tell','email', 'password','adress',
     ];
 
     /**
@@ -38,4 +39,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function histories(){
+        return $this->hasMany('App\Models\History');
+    }
 }

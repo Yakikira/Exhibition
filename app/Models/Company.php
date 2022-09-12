@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class Company extends Model
 {
-    use Notifiable;
+    //use Notifiable;
     use SoftDeletes;
 
     /**
@@ -38,7 +38,11 @@ class User extends Authenticatable
     /**protected $casts = [
         'email_verified_at' => 'datetime',
     ];**/
-    public function Company_users(){
+    public function company_users(){
         return $this->hasMany('App\Models\Company_user');
+    }
+    
+    public function items(){
+        return $this->hasMany('App\Models\Item');
     }
 }

@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+//use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company_user extends Authenticatable
 {
-    use Notifiable;
+    //use Notifiable;
     use SoftDeletes;
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,7 @@ class Company_user extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'company_name','company_dept','business_category','tell','email', 'password','adress','company_id',
+        'cu_name', 'company_name','company_dept','business_category','tell','email', 'password','adress','company_id',
     ];
 
     /**

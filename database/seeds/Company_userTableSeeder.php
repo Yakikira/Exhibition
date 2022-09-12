@@ -12,7 +12,7 @@ class Company_userTableSeeder extends Seeder
     public function run()
     {
         DB::table('company_users')->insert([
-            'name'                  =>'company_user1',
+            'cu_name'                  =>'CU1',
             'company_name'          =>'company1',
             'company_dept'          =>'dept1',
             'business_category'     =>'category1',
@@ -24,7 +24,7 @@ class Company_userTableSeeder extends Seeder
             'company_id'                  =>1,
         ]);
         DB::table('company_users')->insert([
-            'name'                  =>'company_user2',
+            'cu_name'                  =>'company_user2',
             'company_name'          =>'company2',
             'company_dept'          =>'dept2',
             'business_category'     =>'category2',
@@ -36,7 +36,7 @@ class Company_userTableSeeder extends Seeder
             'company_id'                  =>2,
         ]);
         DB::table('company_users')->insert([
-            'name'                  =>'company_user3',
+            'cu_name'                  =>'company_user3',
             'company_name'          =>'company3',
             'company_dept'          =>'dept3',
             'business_category'     =>'category3',

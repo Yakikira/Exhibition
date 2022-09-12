@@ -15,5 +15,13 @@ class Item extends Model
     
     public function booth(){
         return $this->belongsTo('App\Models\Booth');
-    }    
+    }
+    
+    public function histories(){
+        return $thie->hasMany('App\Models\History');
+    }
+    
+    protected $fillable = [
+        'item_name','img_url','item_head','item_body','company_id','booth_id'
+        ];
 }

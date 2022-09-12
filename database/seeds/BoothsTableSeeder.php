@@ -12,26 +12,26 @@ class BoothsTableSeeder extends Seeder
     public function run()
     {
         DB::table('booths')->insert([
-            'title'=>'小型精密モーター',
-            'head'=>'民生用機器や産業機器などに使われるモーターです',
+            'booth_title'=>'小型精密モーター',
+            'booth_head'=>'民生用機器や産業機器などに使われるモーターです',
             'company_id'=>1,
             'exhibition_id'=>1,
             ]);
         DB::table('booths')->insert([
-            'title'=>'スピンドルモーター',
-            'head'=>'民生用機器や産業機器などに使われるモーターです',
+            'booth_title'=>'スピンドルモーター',
+            'booth_head'=>'民生用機器や産業機器などに使われるモーターです',
             'company_id'=>2,
             'exhibition_id'=>1,
             ]);
         DB::table('booths')->insert([
-            'title'=>'ブース3',
-            'head'=>'ブース3の見出し',
+            'booth_title'=>'ブース3',
+            'booth_head'=>'ブース3の見出し',
             'company_id'=>1,
             'exhibition_id'=>2,
             ]);
         DB::table('booths')->insert([
-            'title'=>'ブース4',
-            'head'=>'ブース4の見出し',
+            'booth_title'=>'ブース4',
+            'booth_head'=>'ブース4の見出し',
             'company_id'=>3,
             'exhibition_id'=>2,
             ]);

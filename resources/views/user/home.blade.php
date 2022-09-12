@@ -15,7 +15,7 @@
                     @endif
 
                     一般ユーザーとしてログインしました
-                    <a href="user/top"></a>
+                    <a href="top">トップに戻る</a>
                 </div>
             </div>
         </div>

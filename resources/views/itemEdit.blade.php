@@ -5,14 +5,16 @@
 <html>
     <head>
         <meta charser="utf-8">
-        <title>製品登録画面</title>
+        <title>製品編集画面</title>
     </head>
     <body>
-        <h1>製品登録画面</h1>
+        <h1>製品編集画面</h1>
         <form action="/company_user/items" enctype="multipart/form-data" method="POST">
             @csrf
+            @method('PUT')
             <div class="category">
                 <h2>ブース選択</h2>
+                <div>現在のブース{{$item->booth->booth_title}}</div>
                 <select name="item[booth_id]">
                     @foreach($booths as $booth)
                         <option value="{{$booth->id}}" placeholder="ブース名">{{$booth->booth_title}}</option>
@@ -21,7 +23,7 @@
             </div>
             <div class="title">
                 <h2>製品名</h2>
-                <input type="text" name="item[item_name]" placeholder="製品名" value="{{old('item.name')}}"/>
+                <input type="text" name="item[item_name]" placeholder="製品名" value="{{$item->item_name}}"/>
                 <p class="title_error" style="color:red">{{$errors->first('item.title')}}</p>
             </div>
             <div class="head">

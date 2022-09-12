@@ -15,8 +15,8 @@ class CreateBoothsTable extends Migration
     {
         Schema::create('booths', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('head');
+            $table->string('booth_title');
+            $table->string('booth_head');
             $table->bigInteger('company_id')->usigned();
             $table->bigInteger('exhibition_id')->unsigned()->nullable();
             $table->timestamps();

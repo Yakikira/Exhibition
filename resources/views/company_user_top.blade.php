@@ -23,12 +23,6 @@
             </div>
         </div>  
     </div>
-    <div>
-      <form action="/query" method="GET">
-        <input type="text" name="keyword">
-        <input type="submit" value="検索">
-      </form>
-    </div>
 </body>
 </html>
 @endsection

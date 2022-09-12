@@ -1,3 +1,4 @@
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,9 +9,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     企業ユーザーとしてログインしました
-                    <a href="company_user/top">戻る</a>
+                    <p>
+                        <a href="top">トップに戻る</a>
+                    </p>
                 </div>
 
             </div>

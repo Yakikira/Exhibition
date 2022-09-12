@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsTable extends Migration
+class CreateHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('item_name');
-            $table->string('img_url');
-            $table->string('file_url');
-            $table->string('item_head');
-            $table->string('item_body');
-            $table->bigInteger('company_id')->unsigned();
-            $table->bigInteger('booth_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('item_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +29,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('histories');
     }
 }

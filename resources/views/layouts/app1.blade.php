@@ -39,23 +39,48 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <div>{{Auth::user()}}</div>
                         @unless (Auth::guard('company_user')->check())
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('company_user.login') }}">{{ __('ログイン') }}</a>
-                            </li>
-                            @if (Route::has('company_user.register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('company_user.register') }}">{{ __('新規登録(企業ユーザー)') }}</a>
-                                </li>
-                            @endif
-                        @else
+                        @if (Auth::guard('user')->check())
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href='#'role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->cu_name }}<span class="caret"></span>
+                                    {{ Auth::user()->user_name}}<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/company_user/{{Auth::user()->company_id}}/">企業ユーザーページ</a>
+                                        <a class="dropdown-item" href="{{ route('user.logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('ログアウト') }}
+                                        </a>
+    
+                                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.login') }}">{{ __('ログイン(一般ユーザー)') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('company_user.login') }}">{{ __('ログイン(企業ユーザー)') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('company_user.register') }}">{{ __('新規登録(企業ユーザー)') }}</a>
+                            </li>
+                        @endif
+                        @else    
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href='#'role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    
+                                    {{ Auth::id()}}<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/company_user/{{Auth::user()}}/">企業ユーザーページ</a>
                                     </li>
     
                                     <li aria-labelledby="navbarDropdown">

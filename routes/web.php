@@ -13,11 +13,16 @@
 use App\Http\Controllers;
 
 Route::get('/', 'ExhibitController@top');
-Route::get('/exhibitions/{exhibition}', 'ExhibitController@exhibition');
-Route::get('/exhibitions/{exhibition}/booths/{booth}', 'ExhibitController@booth');
+
+Route::get('/exhibitions/booths/{booth}', 'ExhibitController@booth');
+Route::get('/query', 'ExhibitController@query');
+
+Route::get('/user', 'UserController@user');
+Route::get('/user/top', 'UserController@top');
+Route::get('/mail', 'ExhibitController@invite');
+Route::post('/mail', 'ExhibitController@send');
 
 
-Route::get('/user', 'ExhibitController@user');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::namespace('User')->prefix('user')->name('user.')->group(function(){
     //ログイン認証関連
@@ -33,6 +38,13 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function(){
     });
 });
 
+
+    Route::middleware('auth:user')->group(function(){
+        
+        Route::get('/download/{item}','DownloadController@index');
+    });
+
+
 Route::namespace('Company_user')->prefix('company_user')->name('company_user.')->group(function(){
     //ログイン認証関連
     Auth::routes([
@@ -46,8 +58,26 @@ Route::namespace('Company_user')->prefix('company_user')->name('company_user.')-
         Route::resource('home','HomeController',['only'=>'index']);
     });
 });
-Route::get('/company_user/{company_user}/create', 'ExhibitController@createItem');
-Route::post('/company_user/{company_user}/create','ExhibitController@save');
-Route::get('/company_user/{company_user}', 'ExhibitController@company_user');
-Route::get('/company_user/items/create', 'ExhibitController@createItem');
-Route::post('/company_user/items','ExhibitController@save');
+    Route::middleware('auth:company_user')->group(function(){
+        //topページ
+        Route::get('/company_user/top', 'CompanyUserController@top');
+
+        Route::get('/company_user/items/create', 'ItemController@createItem');
+        Route::get('/company_user/items','ItemController@show');
+        Route::post('/company_user/items','ItemController@save');
+        Route::get('/company_user/items/{item}/edit','ItemController@edit');
+        Route::put('/company_user/items/{item}','ItemController@update');
+        Route::post('/company_user/{{company_user}}/create','ItemController@save');
+        Route::post('/company_user/histories','ItemController@history');
+        Route::get('/company_user/{company_user}', 'ExhibitController@company_user');
+        Route::get('/company_user/{company_user}/member', 'ExhibitController@member');
+        Route::get('/exhibitions/{exhibition}', 'ExhibitController@exhibition');
+    });
+
+
+
+    Route::get('/company_user/{company_user}/create', 'ExhibitController@createItem');
+
+
+
+    Route::get('/company_user/{{company_user}}/items','ItemController@show');

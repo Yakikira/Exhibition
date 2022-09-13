@@ -32,6 +32,7 @@
                     @endforeach
                 </table>
             <li>企業情報管理</li>
+            <li><a href="/invite">メンバー追加</a></li>
         </div>
     </div>
 </body>

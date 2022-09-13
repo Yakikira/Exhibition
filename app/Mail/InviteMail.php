@@ -16,9 +16,9 @@ class InviteMail extends Mailable
      *
      * @return void
      */
-    public function __construct($invite_url, $companyName)
+    public function __construct($url, $companyName)
     {
-        $this->invite_url = $invite_url;
+        $this->invite_url = $url;
         $this->companyName = $companyName;
     }
 

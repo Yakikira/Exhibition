@@ -23,17 +23,17 @@
             </div>
             <div class="title">
                 <h2>製品名</h2>
-                <input type="text" name="item[item_name]" placeholder="製品名" value="{{$item->item_name}}"/>
+                <input type="text" name="item[item_name]" value="{{$item->item_name}}"/>
                 <p class="title_error" style="color:red">{{$errors->first('item.title')}}</p>
             </div>
             <div class="head">
                 <h2>製品の見出し文</h2>
-                <textarea name="item[item_head]" placeholder="製品の見出し文" value="{{old('item.head')}}"></textarea>
+                <textarea name="item[item_head]" value="{{$item->item_head}}"></textarea>
                 <p class="body_error" style="color:red">{{$errors->first('item.head')}}</p>
             </div>
             <div class="body">
                 <h2>製品の紹介文</h2>
-                <textarea name="item[item_body]" placeholder="製品の紹介文" value="{{old('item.body')}}"></textarea>
+                <textarea name="item[item_body]" value="{{$item->item_body}}"></textarea>
                 <p class="body_error" style="color:red">{{$errors->first('item.body')}}</p>
             </div>
             <div>

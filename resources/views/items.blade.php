@@ -23,7 +23,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->item_name}}</td>
                         <td src="{{$item->img_url}}"></td>
-                        <td>編集</td>
+                        <td><a href="/company_user/items/{{$item->id}}/edit">編集</a></td>
                         <td>プレビュー</td>
                     </tr>
                 @endforeach

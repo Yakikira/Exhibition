@@ -13,14 +13,12 @@
 use App\Http\Controllers;
 
 Route::get('/', 'ExhibitController@top');
-
 Route::get('/exhibitions/booths/{booth}', 'ExhibitController@booth');
 Route::get('/query', 'ExhibitController@query');
 
 Route::get('/user', 'UserController@user');
 Route::get('/user/top', 'UserController@top');
-Route::get('/mail', 'ExhibitController@invite');
-Route::post('/mail', 'ExhibitController@send');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -40,7 +38,6 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function(){
 
 
     Route::middleware('auth:user')->group(function(){
-        
         Route::get('/download/{item}','DownloadController@index');
     });
 
@@ -69,9 +66,16 @@ Route::namespace('Company_user')->prefix('company_user')->name('company_user.')-
         Route::put('/company_user/items/{item}','ItemController@update');
         Route::post('/company_user/{{company_user}}/create','ItemController@save');
         Route::post('/company_user/histories','ItemController@history');
-        Route::get('/company_user/{company_user}', 'ExhibitController@company_user');
-        Route::get('/company_user/{company_user}/member', 'ExhibitController@member');
+        Route::get('/company_user/{company_user}', 'CompanyUserController@company_user');
+        Route::get('/company_user/{company_user}/member', 'CompanyUserController@member');
         Route::get('/exhibitions/{exhibition}', 'ExhibitController@exhibition');
+        Route::get('/invite', 'CompanyUserController@invite');
+        Route::post('/invite', 'ExhibitController@send');
+        Route::get('/invite/{company_id}', function (Request $request) {
+            if (! $request->hasValidSignature()) {
+                abort(401);
+                }
+            })->name('invite');
     });
 
 

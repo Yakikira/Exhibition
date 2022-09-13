@@ -34,9 +34,9 @@ class ItemController extends Controller
         $company_id=Auth::user()->company_id;
         return view('items')->with(['items'=>$item->where('company_id',$company_id)->get()]);
     }
-    public function edit(Item $item, Booth $booth){
-        dd($booth);
-        return view('itemEdit')->with(['item'=>$item, 'booths'=>$booth]);
+    public function edit(Item $item, Company $company, Booth $booth){
+        $company_id=Auth::user()->company_id;
+        return view('itemEdit')->with(['item'=>$item, 'booths'=>$booth->where('company_id',$company_id)->get()]);
     }
     public function update(Item $item){
         $company_id=Auth::user()->company_id;

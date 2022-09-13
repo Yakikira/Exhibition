@@ -10,10 +10,13 @@ use App\Models\User;
 use App\Models\Company_user;
 use App\Models\Company;
 use App\Models\History;
+use App\Models\Invite_mails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InviteMail;
+
+use Illuminate\Support\Facades\URL;
 
 class ExhibitController extends Controller
 {
@@ -29,23 +32,10 @@ class ExhibitController extends Controller
     public function user(User $user){
         return view('user')->with(['users'=>$user->get()]);
     }
-    public function company_user(Company_user $company_user){
-        $company_id=Auth::user()->company_id;
-        //$item_id = DB::select('select id from items  where company_id=?',[$company_id]);
-        //dd($item_id);
-        $histories=DB::select('select * from (histories left join users on user_id=users.id) left join items on item_id=items.id where item_id in (select id from items  where company_id=?)',[$company_id]);
-        //dd($histories);
-        //$histories=DB::select('select * from histories where item_id in (select id from items  where company_id=?)',[$company_id]);
-        
-        return view('company_user')->with(['company_user'=>$company_user, "histories"=>$histories]);
-    }
+
     public function createItem(Booth $booth){
         return view('create')->with(['booths'=>$booth->get()]);
     }
-    public function member(Company_user $company_user){
-    return view('member')->with(['company_user'=>$company_user]);
-    }
-    
     public function query(Request $request){
         $keyword = $request->input('keyword');
         $query = Item::query();
@@ -57,28 +47,34 @@ class ExhibitController extends Controller
         }
         return view('query')->with(['items'=>$items]);
     }     
-    public function invite(){
-        return view('invite');    
-    }
+    public function send(Request $request, Invite_mails $invite_mails, InviteMail $invitemail, Company $company){
     
-    public function send3(Request $request){
-    
-        $invite_url = "http://127.0.0.1/register";
-        $companyName = "宛名";
-        $mail="rx782akira@gmail.com";
+        //$companyName = $company->where("id",Auth::user()->company_id);
+        $mail=$request->email;
+        $url="url";
+        $companyName="comp";
+        /*$url=URL::temporarySignedRoute(
+                'invite',
+                now()->addMinutes(30),  // 1分間だけ有効
+                ['company_id' => Auth::user()->company_id]
+            );*/
+        $input["url"]=$url;
+        $input["company_id"]=Auth::user()->company_id;
+        $input["expired_at"]=date("Y-m-d H:i:s",strtotime("+2 hour"));
+        $invite_mails->fill($input)->save();
         
         //どのメールモデルを使用するかを選び、引数に定義した変数を入れておく。
-        Mail::to($mail)->send(new InviteMail($invite_url, $companyName));
+        Mail::to($mail)->send(new InviteMail($url, $companyName));
         
         //flashメッセージでも付与してviewを返してあげる。
         return redirect()->back()->with('flash_message', '招待メールを送信しました。');    
     }
     
-    public function send(Request $request) {
+    public function send3(Request $request) {
         $urls = URL::temporarySignedRoute(
-                'hello.hi',
-                now()->addMinutes(1),  // 1分間だけ有効
-                ['from' => "name"]
+                'invite',
+                now()->addMinutes(30),  // 1分間だけ有効
+                ['company_id' => $company_id]
             );
         $mail = new HelloMail($request, $urls);
         Mail::to($request->email)->send($mail);

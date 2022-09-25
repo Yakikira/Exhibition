@@ -15,6 +15,7 @@ use Storage;
 
 class ItemController extends Controller
 {
+    
     public function createItem(Booth $booth){
         return view('create')->with(['booths'=>$booth->get()]);
     }

@@ -11,6 +11,7 @@
 |
 */
 use App\Http\Controllers;
+use Illuminate\Http\Request;
 
 Route::get('/', 'ExhibitController@top');
 Route::get('/exhibitions/booths/{booth}', 'ExhibitController@booth');
@@ -18,7 +19,6 @@ Route::get('/query', 'ExhibitController@query');
 
 Route::get('/user', 'UserController@user');
 Route::get('/user/top', 'UserController@top');
-
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -58,7 +58,6 @@ Route::namespace('Company_user')->prefix('company_user')->name('company_user.')-
     Route::middleware('auth:company_user')->group(function(){
         //topページ
         Route::get('/company_user/top', 'CompanyUserController@top');
-
         Route::get('/company_user/items/create', 'ItemController@createItem');
         Route::get('/company_user/items','ItemController@show');
         Route::post('/company_user/items','ItemController@save');
@@ -71,13 +70,14 @@ Route::namespace('Company_user')->prefix('company_user')->name('company_user.')-
         Route::get('/exhibitions/{exhibition}', 'ExhibitController@exhibition');
         Route::get('/invite', 'CompanyUserController@invite');
         Route::post('/invite', 'ExhibitController@send');
-        Route::get('/invite/{company_id}', function (Request $request) {
+    });
+
+    Route::get('/invite/{company_id}', function (Request $request) {
             if (! $request->hasValidSignature()) {
                 abort(401);
                 }
-            })->name('invite');
-    });
-
+            return view("company_user.auth.register");
+        })->name('invite');
 
 
     Route::get('/company_user/{company_user}/create', 'ExhibitController@createItem');

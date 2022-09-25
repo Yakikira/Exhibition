@@ -47,17 +47,16 @@ class ExhibitController extends Controller
         }
         return view('query')->with(['items'=>$items]);
     }     
-    public function send(Request $request, Invite_mails $invite_mails, InviteMail $invitemail, Company $company){
+    public function send(Request $request, Invite_mails $invite_mails, Company $company){
     
-        //$companyName = $company->where("id",Auth::user()->company_id);
+        $COM = $company->where("id",Auth::user()->company_id)->get();
+        $companyName=$COM[0]->company_name;
         $mail=$request->email;
-        $url="url";
-        $companyName="comp";
-        /*$url=URL::temporarySignedRoute(
+        $url=URL::temporarySignedRoute(
                 'invite',
-                now()->addMinutes(30),  // 1分間だけ有効
+                now()->addMinutes(30), 
                 ['company_id' => Auth::user()->company_id]
-            );*/
+            );
         $input["url"]=$url;
         $input["company_id"]=Auth::user()->company_id;
         $input["expired_at"]=date("Y-m-d H:i:s",strtotime("+2 hour"));

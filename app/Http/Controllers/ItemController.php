@@ -15,9 +15,12 @@ use Storage;
 
 class ItemController extends Controller
 {
-    
+    public function show(Item $item){
+        $company_id=Auth::user()->company_id;
+        return view('company_user.items')->with(['items'=>$item->where('company_id',$company_id)->get()]);
+    }    
     public function createItem(Booth $booth){
-        return view('create')->with(['booths'=>$booth->get()]);
+        return view('company_user.create')->with(['booths'=>$booth->get()]);
     }
     public function save(StoreItemRequest $request, Item $item){
         $input = $request['item'];
@@ -31,16 +34,12 @@ class ItemController extends Controller
         $item->fill($input)->save();
         return redirect('/');
     }    
-    public function show(Item $item){
-        $company_id=Auth::user()->company_id;
-        return view('items')->with(['items'=>$item->where('company_id',$company_id)->get()]);
-    }
     public function edit(Item $item, Company $company, Booth $booth){
         $company_id=Auth::user()->company_id;
-        return view('itemEdit')->with(['item'=>$item, 'booths'=>$booth->where('company_id',$company_id)->get()]);
+        return view('company_user.itemEdit')->with(['item'=>$item, 'booths'=>$booth->where('company_id',$company_id)->get()]);
     }
     public function update(Item $item){
         $company_id=Auth::user()->company_id;
-        return view('items')->with(['items'=>$item->where('company_id',$company_id)->get()]);
+        return view('company_user.items')->with(['items'=>$item->where('company_id',$company_id)->get()]);
     }
 }

@@ -9,18 +9,25 @@ use App\Models\Item;
 use App\Models\User;
 use App\Models\Company_user;
 use App\Models\Company;
+use App\Models\History;
+use App\Models\Invite_mails;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InviteMail;
 
-class UserController extends Controller
+use Illuminate\Support\Facades\URL;
+
+class UnloginController extends Controller
 {
-    public function top(User $user, Exhibition $exhibition){
-        return view('user.top')->with(['users'=>$user->get(), 'exhibitions'=>$exhibition->get()]);
+    public function top(Exhibition $exhibition){
+        return view('unlogin.top')->with(['exhibitions'=>$exhibition->get()]);
     }
     public function exhibition(Exhibition $exhibition){
-        return view('user.exhibition')->with(['exhibition'=>$exhibition]);
+        return view('unlogin.exhibition')->with(['exhibition'=>$exhibition]);
     }
     public function booth(Booth $booth){
-        return view('user.booth')->with(['booth'=>$booth]);
+        return view('unlogin.booth')->with(['booth'=>$booth]);
     }    
     public function query(Request $request){
         $keyword = $request->input('keyword');
@@ -31,10 +38,6 @@ class UserController extends Controller
                 ->orWhere('item_body', 'LIKE', "%{$keyword}%");
         $items = $query->get();
         }
-        return view('user.query')->with(['items'=>$items]);
-    }   
-    public function user_info(User $user){
-        return view('user.user_info')->with(['users'=>$user->get()]);
-    }
-
+        return view('unlogin.query')->with(['items'=>$items]);
+    }     
 }

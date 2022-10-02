@@ -14,7 +14,7 @@
         <div>
             <a href="/company_user/items">製品一覧</a>
             <a href="/company_user/items/create">製品作成</a>
-            <a href="/company_user/histories">DL履歴一覧</a>
+            <h3>製品ダウンロード履歴一覧</h3>
                 <table class="table table-bordered">
                     <tr>                    
                         <td></td>

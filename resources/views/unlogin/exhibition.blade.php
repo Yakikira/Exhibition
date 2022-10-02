@@ -9,17 +9,18 @@
 </head>
 <body>
     <h1>{{$exhibition->name}}</h1>
-    <div>
-        <div>
-            <div class="booths">
-                @foreach($exhibition->booths as $booth)
-                    <div class="booth">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach($exhibition->booths as $booth)
+            <div class="card">
+                <div class="card-body">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card mb-3">
                         <a href="/exhibitions/booths/{{$booth->id}}">{{$booth->booth_title}}</a>
                         <p>{{$booth->booth_head}}</p>
                     </div>
-                @endforeach
+                </div>
             </div>
-        </div>  
+        @endforeach
     </div>
 </body>
 </html>

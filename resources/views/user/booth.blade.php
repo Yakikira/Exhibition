@@ -1,3 +1,6 @@
+@extends('layouts.user.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -9,34 +12,53 @@
     <h1>{{$booth->booth_title}}</h1>
     <div>
         <h2>{{$booth->booth_title}}</h2>
-        <div>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
             @foreach($booth->items as $item)
-                <div>
-                    <h1>{{$item->item_name}}</h1>
-                    <p>{{$item->item_head}}</p>
-                    <p>{{$item->item_body}}</p>
-                    <img src={{$item->img_url}}>
-                    <button id="download_button{{$item->id}}" onclick="return download2({{$item}})">画像ダウンロードjquery</button>
-                    <a id="/download/{{$item->id}}" onclick="return download2({{$item}})" >画像ダウンロードaタグ</a>
-                    <div>{{$item->id}}</div>
-                    <form id="download_form{{$item->id}}" action="/download/{{$item->id}}" method="GET">
-                            @csrf
-                        <p class="download">[<span onclick="return download(this, {{$item->id}});">画像DLフォーム</span>]</p>
-                    </form>
-                    <button onclick="doDownload('./test.png', 'test.png');">
-                        [test.png]ファイルをダウンロード
-                    </button>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src={{$item->img_url}} width="150" height="150" alt="製品イメージ画像">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h1>{{$item->item_name}}</h1>
+                        <p>{{$item->item_head}}</p>
+                        <p>{{$item->item_body}}</p>
+                        <a class="btn btn-primary" id="/user/download/{{$item->id}}" onclick="return dlFile({{$item}})" >製品資料ダウンロード</a>
+                        <a style="display:none" id="dlId"></a>
+                        </div>
+                    </div>
                 </div>
+            </div>
             @endforeach
         </div>
     </div>
     <script>
-        function download(e, id){
-            'use strict';
-            if (confirm("本当にDLしますか？")){
-                document.getElementById(`download_form${id}`).submit();
-        }}
-        
+        function dlFile(item){
+            var save = new XMLHttpRequest();
+            var id = item["id"];
+            var url = `/user/download/${id}`;
+            console.log(url);
+            save.open('GET',`/user/download/${id}`, true);
+            save.send();
+            save.onreadystatechange = function(){
+                console.log(this.readyState);
+                console.log(this.status);
+                console.log(this.responseText);
+                if(this.readyState == 4 && this.status == 200){
+
+                    
+                    var dlurl = item["file_url"];
+                    var filename = item["name"];
+                    const fileName = 'file';
+                    let link = document.getElementById("dlId");
+                    link.href= dlurl;
+                    link.download = `${filename}.dox`;
+                    link.click();
+                }
+            }
+        }
+
         function download2(item){
             console.log(item);
             var save = new XMLHttpRequest();
@@ -58,8 +80,7 @@
             //dl.send();
             link.click();
         }
-
-
     </script>
 </body>
 </html>
+@endsection

@@ -1,5 +1,4 @@
-@extends((Auth::guard('company_user')->check())?'layouts.company_user.app':
-((Auth::guard('user')->check())?'layouts.user.app':'layouts.app'))
+@extends('layouts.user.app')
 
 @section('content')
 <!DOCTYPE html>
@@ -9,25 +8,24 @@
     <title>トップページ</title>
 </head>
 <body>
-    <h1>展示会一覧ページ</h1>
+    <h1>トップページ</h1>
     <div>
         <div>
-            <h2>展示会New</h2>
-            <div class="exhibitions">
+            <h2>展示会一覧</h2>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
                 @foreach($exhibitions as $exhibition)
-                    <div class="exhibition">
-                        <a href='/exhibitions/{{ $exhibition->id }}'>{{$exhibition->name}}</a>
-                        <p>{{$exhibition->explain}}</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card mb-3">
+                                <a class="card-title" href='/user/exhibitions/{{ $exhibition->id }}'>{{$exhibition->name}}</a>
+                                <p class="card-text">{{$exhibition->explain}}</p>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
-        </div>  
-    </div>
-    <div>
-      <form action="/query" method="GET">
-        <input type="text" name="keyword">
-        <input type="submit" value="検索">
-      </form>
+        </div>
     </div>
 </body>
 </html>

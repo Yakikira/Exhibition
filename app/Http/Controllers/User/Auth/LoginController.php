@@ -48,6 +48,9 @@ class LoginController extends Controller
     
     //ログイン画面
     public function showLoginForm(){
+        /*if (!session()->has('url.intended')) {
+            session(['url.intended' => url()->previous()]);
+        }*/
         return view('user.auth.login');
     } 
     

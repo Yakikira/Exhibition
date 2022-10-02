@@ -11,7 +11,7 @@
                     @endif
                     企業ユーザーとしてログインしました
                     <p>
-                        <a href="top">トップに戻る</a>
+                        <a href="/company_user/">トップに戻る</a>
                     </p>
                 </div>
 

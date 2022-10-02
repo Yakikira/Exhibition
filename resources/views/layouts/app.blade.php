@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>WEB展示会</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,9 +23,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <a class="navbar-brand" href="/">WEB展示会</a>
+                    <form action="/query" method="GET">
+                        <input type="text" name="keyword">
+                        <input type="submit" value="製品検索">
+                    </form>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -41,10 +43,13 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.login') }}">{{ __('一般ユーザーログイン') }}</a>
+                                <a class="nav-link" href="{{ route('user.login') }}">ログイン</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('company_user.login') }}">{{ __('企業ユーザーログイン') }}</a>
+                                <a class="nav-link" href="{{ route('user.register') }}">会員登録</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('company_user.login') }}">企業会員ログイン</a>
                             </li>
                         @endguest
                     </ul>

@@ -15,17 +15,34 @@ use Illuminate\Support\Facades\DB;
 
 class CompanyUserController extends Controller
 {
-    public function user(User $user){
+    /*public function user(User $user){
         return view('user')->with(['users'=>$user->get()]);
-    }
+    }*/
     public function top(Company_user $company_user, Exhibition $exhibition){
-        return view('company_user_top')->with(['company_users'=>$company_user->get(),'exhibitions'=>$exhibition->get()]);
+        return view('company_user.top')->with(['company_users'=>$company_user->get(),'exhibitions'=>$exhibition->get()]);
+    }
+    public function exhibition(Exhibition $exhibition){
+        return view('company_user.exhibition')->with(['exhibition'=>$exhibition]);
+    }
+    public function booth(Booth $booth){
+        return view('company_user.booth')->with(['booth'=>$booth]);
+    }
+    public function query(Request $request){
+        $keyword = $request->input('keyword');
+        $query = Item::query();
+        if(!empty($keyword)) {
+            $query->where('item_name', 'LIKE', "%{$keyword}%")
+                ->orWhere('item_head', 'LIKE', "%{$keyword}%")
+                ->orWhere('item_body', 'LIKE', "%{$keyword}%");
+        $items = $query->get();
+        }
+        return view('company_user.query')->with(['items'=>$items]);
     }
     public function member(Company_user $company_user){
-        return view('member')->with(['company_user'=>$company_user]);
+        return view('company_user.member')->with(['company_user'=>$company_user]);
     }
     public function invite(){
-        return view('invite');    
+        return view('company_user.invite');    
     }
     public function company_user(Company_user $company_user){
         $company_id=Auth::user()->company_id;
@@ -35,6 +52,6 @@ class CompanyUserController extends Controller
         //dd($histories);
         //$histories=DB::select('select * from histories where item_id in (select id from items  where company_id=?)',[$company_id]);
         
-        return view('company_user')->with(['company_user'=>$company_user, "histories"=>$histories]);
+        return view('company_user.company_user')->with(['company_user'=>$company_user, "histories"=>$histories]);
     }
 }

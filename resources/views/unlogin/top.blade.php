@@ -1,4 +1,4 @@
-@extends('layouts.company_user.app')
+@extends('layouts.app')
 
 @section('content')
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <img src="..." class="card-img-top" alt="...">
                             <div class="card mb-3">
-                                <a class="card-title" href='/company_user/exhibitions/{{ $exhibition->id }}'>{{$exhibition->name}}</a>
+                                <a class="card-title" href='/exhibitions/{{ $exhibition->id }}'>{{$exhibition->name}}</a>
                                 <p class="card-text">{{$exhibition->explain}}</p>
                             </div>
                         </div>

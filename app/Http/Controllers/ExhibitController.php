@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\URL;
 class ExhibitController extends Controller
 {
     public function top(Exhibition $exhibition){
-        return view('top')->with(['exhibitions'=>$exhibition->get()]);
+        return view('unlogin.top')->with(['exhibitions'=>$exhibition->get()]);
     }
     public function exhibition(Exhibition $exhibition){
-        return view('exhibition')->with(['exhibition'=>$exhibition]);
+        return view('unlogin.exhibition')->with(['exhibition'=>$exhibition]);
     }
     public function booth(Booth $booth){
         return view('booth')->with(['booth'=>$booth]);
